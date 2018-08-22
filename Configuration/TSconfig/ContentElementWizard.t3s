@@ -1,0 +1,13 @@
+mod.wizards.newContentElement.wizardItems.plugins {
+    elements {
+        anfahrt {
+            iconIdentifier = ext-anfahrt-wizard-icon
+            title = LLL:EXT:anfahrt/Resources/Private/Language/locallang.xlf:pi1_title
+            description = LLL:EXT:anfahrt/Resources/Private/Language/locallang.xlf:pi1_plus_wiz_description
+            tt_content_defValues {
+                CType = list
+                list_type = anfahrt_pi1
+            }
+        }
+    }
+}

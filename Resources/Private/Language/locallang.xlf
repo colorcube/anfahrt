@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" data="2016-10-17T16-53-24"
+          product-name="anfahrt">
+        <header/>
+        <body>
+            <trans-unit id="tt_content.list_type_pi1">
+                <source>Simple map for one location</source>
+            </trans-unit>
+            <trans-unit id="pi1_title">
+                <source>Simple map for one location</source>
+            </trans-unit>
+            <trans-unit id="pi1_plus_wiz_description">
+                <source>Simple map plugin with marker and popup window.</source>
+            </trans-unit>
+            <trans-unit id="anfahrt.pi_flexform.be_geocode_description">
+                <source>Street, ZIP Code, City, Country</source>
+            </trans-unit>
+            <trans-unit id="anfahrt.pi_flexform.be_go">
+                <source>Search coordinates for given address</source>
+            </trans-unit>
+            <trans-unit id="anfahrt.pi_flexform.be_drag_description">
+                <source>The marker can be dragged to change the coordinates.</source>
+            </trans-unit>
+            <trans-unit id="anfahrt.pi_flexform.sheet_display">
+                <source>Display</source>
+            </trans-unit>
+            <trans-unit id="anfahrt.pi_flexform.sheet_general">
+                <source>Location</source>
+            </trans-unit>
+            <trans-unit id="anfahrt.pi_flexform.sheet_description">
+                <source>Display and description</source>
+            </trans-unit>
+            <trans-unit id="anfahrt.pi_flexform.address">
+                <source>Address (for route planning)</source>
+            </trans-unit>
+            <trans-unit id="anfahrt.pi_flexform.geocode">
+                <source>Geocoding</source>
+            </trans-unit>
+            <trans-unit id="anfahrt.pi_flexform.latitude">
+                <source>Latitude</source>
+            </trans-unit>
+            <trans-unit id="anfahrt.pi_flexform.longitude">
+                <source>Longitude</source>
+            </trans-unit>
+            <trans-unit id="anfahrt.pi_flexform.width">
+                <source>Width of map (add px, %, em, ...)</source>
+            </trans-unit>
+            <trans-unit id="anfahrt.pi_flexform.height">
+                <source>Height of map (add px, %, em, ...)</source>
+            </trans-unit>
+            <trans-unit id="anfahrt.pi_flexform.zoom">
+                <source>Map zoom level</source>
+            </trans-unit>
+            <trans-unit id="anfahrt.pi_flexform.zoom_default">
+                <source>Default</source>
+            </trans-unit>
+            <trans-unit id="anfahrt.pi_flexform.text">
+                <source>Text</source>
+            </trans-unit>
+            <trans-unit id="anfahrt.route_planner">
+                <source>route planner</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

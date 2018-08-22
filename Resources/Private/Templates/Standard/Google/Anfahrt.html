@@ -1,0 +1,72 @@
+<html xmlns:f="http://xsd.helmut-hummel.de/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:cc="http://typo3.org/ns/Colorcube/Anfahrt/ViewHelpers" data-namespace-typo3-fluid="true">
+
+
+<div class="tx-anfahrt-pi1">
+    <div id="map-anfahrt{id}" style="height: {height}; width: {width}; margin: 1rem 0; padding: 0"></div>
+</div>
+
+
+<cc:variable.set name="popupWindowJson"><cc:inlineJson>
+        <f:format.html>{description}</f:format.html>
+
+        <p>
+            <f:link.external
+                    uri="https://www.google.com/maps/dir//{address -> f:format.urlencode()}/@{latitude},{longitude}"
+                    target="_blank">
+                <f:translate key="LLL:EXT:anfahrt/Resources/Private/Language/locallang.xlf:anfahrt.route_planner"/>
+            </f:link.external>
+        </p>
+    </cc:inlineJson>
+</cc:variable.set>
+
+
+<cc:variable.set name="addressJson"><cc:inlineJson>{address}</cc:inlineJson>
+</cc:variable.set>
+
+
+<cc:page.footerData>
+    <cc:javaScript>
+        <script>
+            if (typeof window.initialize_anfahrt_maps === 'undefined') {
+                var array_of_initialize_anfahrt_maps_functions = [];
+
+                window.initialize_anfahrt_maps = function() {
+                    for (i = 0; i < array_of_initialize_anfahrt_maps_functions.length; i++) {
+                        array_of_initialize_anfahrt_maps_functions[i]();
+                    }
+                }
+            }
+
+            function initialize_anfahrt_map$v_id() {
+                var myLatlng = new google.maps.LatLng($v_latitude, $v_longitude);
+                var mapOptions = {
+                    zoom: $v_zoom,
+                    center: myLatlng
+                };
+
+                var map = new google.maps.Map(document.getElementById('map-anfahrt$v_id'), mapOptions);
+
+                var infowindow = new google.maps.InfoWindow({
+                    content: $v_popupWindowJson
+                });
+
+                var marker = new google.maps.Marker({
+                    position: myLatlng,
+                    map: map,
+                    title: $v_addressJson
+                });
+                google.maps.event.addListener(marker, 'click', function () {
+                    infowindow.open(map, marker);
+                });
+                google.maps.event.addListenerOnce(map, 'idle', function () {
+                    infowindow.open(map, marker);
+                });
+            }
+
+            array_of_initialize_anfahrt_maps_functions.push(initialize_anfahrt_map$v_id);
+        </script>
+    </cc:javaScript>
+
+</cc:page.footerData>
+</html>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.0">
+    <file source-language="en" target-language="de" datatype="plaintext" original="messages" data="2016-10-17T16-53-24"
+          product-name="anfahrt">
+        <header/>
+        <body>
+            <trans-unit id="tt_content.list_type_pi1">
+                <source>Simple map for one location</source>
+                <target>Einfache Anfahrtskarte</target>
+            </trans-unit>
+            <trans-unit id="pi1_title">
+                <source>Simple map for one location</source>
+                <target>Einfache Anfahrtskarte</target>
+            </trans-unit>
+            <trans-unit id="pi1_plus_wiz_description">
+                <source>Simple map plugin with marker and popup window.</source>
+                <target>Einfache Anfahrtskarte mit Marker und Popup Fenster.</target>
+            </trans-unit>
+            <trans-unit id="anfahrt.pi_flexform.be_geocode_description">
+                <source>Street, ZIP Code, City, Country</source>
+                <target>Straße, PLZ, Stadt, Land</target>
+            </trans-unit>
+            <trans-unit id="anfahrt.pi_flexform.be_go">
+                <source>Search coordinates for given address</source>
+                <target>Koordinaten für Adresse suchen</target>
+            </trans-unit>
+            <trans-unit id="anfahrt.pi_flexform.be_drag_description">
+                <source>The marker can be dragged to change the coordinates.</source>
+                <target>Der Marker kann in der Karte verschoben werden um die Position zu verändern.</target>
+            </trans-unit>
+            <trans-unit id="anfahrt.pi_flexform.sheet_display">
+                <source>Display</source>
+                <target>Anzeige</target>
+            </trans-unit>
+            <trans-unit id="anfahrt.pi_flexform.sheet_general">
+                <source>Location</source>
+                <target>Standort</target>
+            </trans-unit>
+            <trans-unit id="anfahrt.pi_flexform.sheet_description">
+                <source>Display and description</source>
+                <target>Ansicht und Beschreibung</target>
+            </trans-unit>
+            <trans-unit id="anfahrt.pi_flexform.address">
+                <source>Address (for route planning)</source>
+                <target>Adresse (für Routenplaner)</target>
+            </trans-unit>
+            <trans-unit id="anfahrt.pi_flexform.geocode">
+                <source>Geocoding</source>
+                <target>Geocoding</target>
+            </trans-unit>
+            <trans-unit id="anfahrt.pi_flexform.latitude">
+                <source>Latitude</source>
+                <target>Breitengrad</target>
+            </trans-unit>
+            <trans-unit id="anfahrt.pi_flexform.longitude">
+                <source>Longitude</source>
+                <target>Längengrad</target>
+            </trans-unit>
+            <trans-unit id="anfahrt.pi_flexform.width">
+                <source>Width of map (add px, %, em, ...)</source>
+                <target>Breite der Karte (verwende px, %, em, ...)</target>
+            </trans-unit>
+            <trans-unit id="anfahrt.pi_flexform.height">
+                <source>Height of map (add px, %, em, ...)</source>
+                <target>Höhe der Karte (verwende px, %, em, ...)</target>
+            </trans-unit>
+            <trans-unit id="anfahrt.pi_flexform.zoom">
+                <source>Map zoom level</source>
+                <target>Karten-Zoomstufe</target>
+            </trans-unit>
+            <trans-unit id="anfahrt.pi_flexform.zoom_default">
+                <source>Default</source>
+                <target>Standard-Zoomstufe</target>
+            </trans-unit>
+            <trans-unit id="anfahrt.pi_flexform.text">
+                <source>Text</source>
+                <target>Text</target>
+            </trans-unit>
+            <trans-unit id="anfahrt.route_planner">
+                <source>route planner</source>
+                <target>Routenplaner</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

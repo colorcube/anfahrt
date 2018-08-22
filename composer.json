@@ -1,0 +1,43 @@
+{
+    "name": "colorcube/anfahrt",
+    "type": "typo3-cms-extension",
+    "description": "A TYPO3 extension that provides a simple Google Map plugin with marker and popup window",
+    "keywords": [
+        "TYPO3",
+        "extension",
+        "anfahrt",
+        "map",
+        "directions"
+    ],
+    "license": "GPL-2.0-or-later",
+    "homepage": "https://github.com/colorcube/anfahrt",
+    "support": {
+        "issues": "https://github.com/colorcube/anfahrt/issues"
+    },
+    "authors": [
+        {
+            "name": "René Fritz",
+            "email": "r.fritz@colorcube.de",
+            "role": "Developer",
+            "homepage": "http://www.colorcube.de"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.0",
+        "typo3/cms-core": "^8.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Colorcube\\Anfahrt\\": "Classes"
+        }
+    },
+    "replace": {
+        "anfahrt": "self.version",
+        "typo3-ter/anfahrt": "self.version"
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "anfahrt"
+        }
+    }
+}

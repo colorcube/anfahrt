@@ -1,9 +1,7 @@
 <?php
 namespace Colorcube\Anfahrt\ViewHelpers;
 
-
-
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+use Colorcube\Anfahrt\Utility\ViewHelperUtility;
 use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3\CMS\Fluid\Core\ViewHelper\Facets\CompilableInterface;
@@ -55,7 +53,8 @@ class InlineJsonViewHelper extends AbstractViewHelper implements CompilableInter
      */
     public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext)
     {
-        $allVariables = $renderingContext->getTemplateVariableContainer()->getAll();
+        $variableProvider = ViewHelperUtility::getVariableProviderFromRenderingContext($renderingContext);
+        $allVariables = $variableProvider->getAll();
 
         $value = $arguments['value'];
         if ($value === null) {

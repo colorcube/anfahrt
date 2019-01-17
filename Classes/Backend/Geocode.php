@@ -73,6 +73,12 @@ class Geocode
           <script type="text/javascript">
             function initialize_anfahrt_map() {
                 anfahrt_map(' . $latitudeFlex . ', ' . $longitudeFlex . ', ' . json_encode($address) . ');
+                document.getElementById(\'address\').addEventListener(\'keypress\', function(event) {
+                    if (event.keyCode == 13) {
+                        codeAddress(document.getElementById(\'address\').value);
+                        event.preventDefault();
+                    }
+                });
             }
           </script>';
 

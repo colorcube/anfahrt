@@ -8,8 +8,12 @@ namespace Colorcube\Anfahrt\ViewHelpers\Variable;
  * LICENSE.md file that was distributed with this source code.
  */
 
+use Colorcube\Anfahrt\Utility\ViewHelperUtility;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
+use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3\CMS\Fluid\Core\ViewHelper\Facets\CompilableInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithContentArgumentAndRenderStatic;
 
 /**
  * ### Variable: Set
@@ -52,47 +56,62 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
  *
  * Using as `{value -> v:variable.set(name: 'myVar')}` makes `{myVar}` contain
  * `{value}`.
- *
- * @author Claus Due <claus@namelesscoder.net>
- * @package Vhs
- * @subpackage ViewHelpers\Var
  */
-class SetViewHelper extends AbstractViewHelper {
+class SetViewHelper extends AbstractViewHelper implements CompilableInterface
+{
+    use CompileWithContentArgumentAndRenderStatic;
+    /**
+     * @var boolean
+     */
+    protected $escapeChildren = false;
 
-	/**
-	 * Set (override) the variable in $name.
-	 *
-	 * @param string $name
-	 * @param mixed $value
-	 * @return void
-	 */
-	public function render($name, $value = NULL) {
-		if (NULL === $value) {
-			$value = $this->renderChildren();
-		}
-		if (FALSE === strpos($name, '.')) {
-			if (TRUE === $this->templateVariableContainer->exists($name)) {
-				$this->templateVariableContainer->remove($name);
-			}
-			$this->templateVariableContainer->add($name, $value);
-		} elseif (1 === substr_count($name, '.')) {
-			$parts = explode('.', $name);
-			$objectName = array_shift($parts);
-			$path = implode('.', $parts);
-			if (FALSE === $this->templateVariableContainer->exists($objectName)) {
-                $this->templateVariableContainer->add($objectName, array());
-			}
-			$object = $this->templateVariableContainer->get($objectName);
-			try {
-				ObjectAccess::setProperty($object, $path, $value);
-				// Note: re-insert the variable to ensure unreferenced values like arrays also get updated
-				$this->templateVariableContainer->remove($objectName);
-				$this->templateVariableContainer->add($objectName, $object);
-			} catch (\Exception $error) {
-				return NULL;
-			}
-		}
-		return NULL;
-	}
+    /**
+     * @return void
+     */
+    public function initializeArguments()
+    {
+        $this->registerArgument('value', 'mixed', 'Value to set');
+        $this->registerArgument('name', 'string', 'Name of variable to assign');
+    }
 
+    /**
+     * @param array $arguments
+     * @param \Closure $renderChildrenClosure
+     * @param RenderingContextInterface $renderingContext
+     *
+     * @return mixed
+     */
+    public static function renderStatic(
+        array $arguments,
+        \Closure $renderChildrenClosure,
+        RenderingContextInterface $renderingContext
+    ) {
+        $name             = $arguments['name'];
+        $value            = $renderChildrenClosure();
+        $variableProvider = ViewHelperUtility::getVariableProviderFromRenderingContext($renderingContext);
+        if (false === strpos($name, '.')) {
+            if (true === $variableProvider->exists($name)) {
+                $variableProvider->remove($name);
+            }
+            $variableProvider->add($name, $value);
+        } elseif (1 === mb_substr_count($name, '.')) {
+            $parts      = explode('.', $name);
+            $objectName = array_shift($parts);
+            $path       = implode('.', $parts);
+            if (false === $variableProvider->exists($objectName)) {
+                return null;
+            }
+            $object = $variableProvider->get($objectName);
+            try {
+                ObjectAccess::setProperty($object, $path, $value);
+                // Note: re-insert the variable to ensure unreferenced values like arrays also get updated
+                $variableProvider->remove($objectName);
+                $variableProvider->add($objectName, $object);
+            } catch (\Exception $error) {
+                return null;
+            }
+        }
+
+        return null;
+    }
 }

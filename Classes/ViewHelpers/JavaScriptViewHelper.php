@@ -11,6 +11,7 @@ namespace Colorcube\Anfahrt\ViewHelpers;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
+use Colorcube\Anfahrt\Utility\ViewHelperUtility;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
@@ -71,7 +72,8 @@ class JavaScriptViewHelper extends AbstractViewHelper implements CompilableInter
      */
     public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext)
     {
-        $allVariables = $renderingContext->getTemplateVariableContainer()->getAll();
+        $variableProvider = ViewHelperUtility::getVariableProviderFromRenderingContext($renderingContext);
+        $allVariables = $variableProvider->getAll();
 
         $value = $arguments['value'];
         if ($value === null) {

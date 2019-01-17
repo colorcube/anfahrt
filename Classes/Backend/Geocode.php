@@ -36,9 +36,8 @@ class Geocode
         $LL = $this->includeLocalLang();
 
         return '
-            <form action="#">
             <input type="text" name="' . $PA['itemFormElName'] . '" id="address" value="' . htmlspecialchars($PA['itemFormElValue']) . '" style="min-width:30em; width: 70%;" />
-            <input type="button" onclick="codeAddress(document.getElementById(\'address\').value)" value="' . $GLOBALS['LANG']->getLLL('anfahrt.pi_flexform.be_go', $LL) . '" />
+            <input type="button" onclick="codeAddress(document.getElementById(\'address\').value); return false;" value="' . $GLOBALS['LANG']->getLLL('anfahrt.pi_flexform.be_go', $LL) . '" />
             <p class="help-block">' . htmlspecialchars($GLOBALS['LANG']->getLLL('anfahrt.pi_flexform.be_geocode_description', $LL)) . '</p>';
     }
 
@@ -67,7 +66,7 @@ class Geocode
         $content = '
           <div id="map" style="min-width:400px width:100%; max-width:100%; height: 400px"></div>
           <p class="help-block">' . $iconFactory->getIcon('overlay-info', Icon::SIZE_SMALL)->render() . ' ' .htmlspecialchars($GLOBALS['LANG']->getLLL('anfahrt.pi_flexform.be_drag_description', $LL)) . '</p>
-          </form><br />
+          <br />
 
           <script async defer src="../typo3conf/ext/anfahrt/Resources/Public/JavaScript/BackendGeocode.js" type="text/javascript"></script>
           <script async defer src="https://maps.googleapis.com/maps/api/js?key='.$googleMapApiKey.'&callback=initialize_anfahrt_map" type="text/javascript"></script>

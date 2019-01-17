@@ -67,7 +67,6 @@ class Geocode
           <div id="map" style="min-width:400px width:100%; max-width:100%; height: 400px"></div>
           <p class="help-block">' . $iconFactory->getIcon('overlay-info', Icon::SIZE_SMALL)->render() . ' ' .htmlspecialchars($GLOBALS['LANG']->getLLL('anfahrt.pi_flexform.be_drag_description', $LL)) . '</p>
           <br />
-          <input class="formField2" name="' . $config['itemFormElName'] . '" value="' . htmlspecialchars($config['itemFormElValue']) . '" />
 
           <script async defer src="../typo3conf/ext/anfahrt/Resources/Public/JavaScript/BackendGeocode.js" type="text/javascript"></script>
           <script async defer src="https://maps.googleapis.com/maps/api/js?key='.$googleMapApiKey.'&callback=initialize_anfahrt_map" type="text/javascript"></script>

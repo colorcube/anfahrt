@@ -68,7 +68,7 @@ class Geocode
           <p class="help-block">' . $iconFactory->getIcon('overlay-info', Icon::SIZE_SMALL)->render() . ' ' .htmlspecialchars($GLOBALS['LANG']->getLLL('anfahrt.pi_flexform.be_drag_description', $LL)) . '</p>
           <br />
 
-          <script async defer src="../typo3conf/ext/anfahrt/Resources/Public/JavaScript/BackendGeocode.js" type="text/javascript"></script>
+          <script src="../typo3conf/ext/anfahrt/Resources/Public/JavaScript/BackendGeocode.js" type="text/javascript"></script>
           <script async defer src="https://maps.googleapis.com/maps/api/js?key='.$googleMapApiKey.'&callback=initialize_anfahrt_map" type="text/javascript"></script>
           <script type="text/javascript">
             function initialize_anfahrt_map() {

@@ -4,7 +4,7 @@ This is a TYPO3 extension that provides a simple map plugin with marker and popu
 
 ## Usage
 
-Further information: https://docs.typo3.org/typo3cms/extensions/anfahrt/
+Further information: https://docs.typo3.org/p/colorcube/anfahrt/master/en-us/
 
 ### Dependencies
 

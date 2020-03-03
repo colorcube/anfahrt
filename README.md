@@ -8,7 +8,7 @@ Further information: https://docs.typo3.org/typo3cms/extensions/anfahrt/
 
 ### Dependencies
 
-* TYPO3 8.7
+* TYPO3 8.7, 9.5
 
 ### Installation
 

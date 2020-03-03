@@ -32,7 +32,6 @@
         }
     },
     "replace": {
-        "anfahrt": "self.version",
         "typo3-ter/anfahrt": "self.version"
     },
     "extra": {

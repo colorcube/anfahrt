@@ -30,13 +30,10 @@ Anfahrt: Simple map for one location
 		fun
 
 	:Copyright:
-		2018
+		2018-2020
 
 	:Author:
 		René Fritz
-
-	:Email:
-		r.fritz@colorcube.de
 
 	:License:
 		This document is published under the Open Publication License
@@ -46,14 +43,13 @@ Anfahrt: Simple map for one location
 		|today|
 
 	The content of this document is related to TYPO3,
-	a GNU/GPL CMS/Framework available from `www.typo3.org <http://www.typo3.org/>`_.
+	a GNU/GPL CMS/Framework available from `www.typo3.org <https://www.typo3.org/>`_.
 
-
-	**Table of Contents**
 
 .. toctree::
-	:maxdepth: 5
+	:hidden:
 
+	Sitemap/Index
 	Introduction/Index
 	UsersManual/Index
 	AdministratorManual/Index

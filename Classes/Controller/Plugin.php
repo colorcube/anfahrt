@@ -11,7 +11,6 @@ namespace Colorcube\Anfahrt\Controller;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 
 
@@ -20,7 +19,8 @@ use TYPO3\CMS\Fluid\View\StandaloneView;
  *
  * @author René Fritz <r.fritz@colorcube.de>
  */
-class Plugin {
+class Plugin
+{
 
     /**
      * The current cObject
@@ -32,45 +32,58 @@ class Plugin {
     public $cObj;
 
 
-	function main($content, $conf) 
+    function main($content, $conf)
     {
-		$this->pi_initPIflexForm ();
+
+        $view = GeneralUtility::makeInstance(StandaloneView::class , $this->cObj);
+        $view->setTemplateRootPaths(array(GeneralUtility::getFileAbsFileName($conf['view.']['templateRootPath'])));
+        $view->setFormat('html');
+
+        $this->pi_initPIflexForm();
+
+        $settings = $conf['settings.'];
 
         $variables = [];
 
         $variables['id'] = $this->cObj->data['uid'];
 
-		$width = trim($this->pi_getFFvalue( $this->cObj->data['pi_flexform'], 'width', 'description' ));
-        $variables['width'] = $width ? $width : $conf['settings.']['width'];
-		$height = trim($this->pi_getFFvalue( $this->cObj->data['pi_flexform'], 'height', 'description' ));
-		$variables['height'] = $height ? $height : $conf['settings.']['height'];
-        $zoom = (int)($this->pi_getFFvalue( $this->cObj->data['pi_flexform'], 'zoom', 'description' ));
-        $variables['zoom'] = $zoom ? $zoom : $conf['settings.']['zoom'];
+        $width = trim($this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'width', 'description'));
+        $variables['width'] = $width ? $width : $settings['width'];
+        $height = trim($this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'height', 'description'));
+        $variables['height'] = $height ? $height : $settings['height'];
+        $zoom = (int)($this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'zoom', 'description'));
+        $variables['zoom'] = $zoom ? $zoom : $settings['zoom'];
 
-		$variables['latitude'] = $this->pi_getFFvalue( $this->cObj->data['pi_flexform'], 'latitude', 'sDEF' );
-		$variables['longitude'] = $this->pi_getFFvalue( $this->cObj->data['pi_flexform'], 'longitude', 'sDEF' );
-		$variables['address'] = $this->pi_getFFvalue( $this->cObj->data['pi_flexform'], 'address', 'description' );
+        $variables['latitude'] = $this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'latitude', 'sDEF');
+        $variables['longitude'] = $this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'longitude', 'sDEF');
+        $variables['address'] = $this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'address', 'description');
         $variables['address_json'] = json_encode($variables['address']);
 
-        $variables['description'] = $this->pi_getFFvalue( $this->cObj->data['pi_flexform'], 'text', 'description' );
+        $variables['description'] = $this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'text', 'description');
 
-        $googleMapApiKey = \Colorcube\Anfahrt\Utility\EmConfiguration::get('googleMapApiKey');
-        if (!$googleMapApiKey) {
-            return '<div>Google Maps API key not configured in extension configuration of \'anfahrt\' extension!</div>';
+        switch ($settings['mapProvider']) {
+            case 'google':
+                $googleMapApiKey = $settings['googleApiKey'] ? $settings['googleApiKey'] : \Colorcube\Anfahrt\Utility\EmConfiguration::get('googleMapApiKey');
+                if (!$googleMapApiKey) {
+                    return '<div>Google Maps API key not configured in extension configuration of \'anfahrt\' extension!</div>';
+                }
+                $variables['googleApiKey'] = $googleMapApiKey;
+                $view->setTemplate('Google/Anfahrt');
+                break;
+            case 'leaflet':
+                $variables['leafletTilesUrl'] = $settings['leafletTilesUrl'];
+                $variables['leafletAttribution'] = $settings['leafletAttribution'];
+                $view->setTemplate('Leaflet/Anfahrt');
+                break;
+
+            default:
+                return '<div>settings.mapProvider not configured in TypoScript setup of \'anfahrt\' extension!</div>';
+                break;
         }
-        $variables['googleMapApiKey'] = $googleMapApiKey;
 
-        $GLOBALS['TSFE']->additionalFooterData['anfahrt-google-maps'] =
-        '<script src="https://maps.googleapis.com/maps/api/js?key='.htmlspecialchars($googleMapApiKey).'&amp;callback=initialize_anfahrt_maps" async defer></script>';
-
-        $view = GeneralUtility::makeInstance(StandaloneView::class, $this->cObj);
-        $view->setTemplateRootPaths(array(GeneralUtility::getFileAbsFileName($conf['view.']['templateRootPath'])));
-        $view->setFormat('html');
-        $view->setTemplate('Google/Anfahrt');
         $view->assignMultiple($variables);
         return $view->render();
-
-	}
+    }
 
 
 
@@ -79,6 +92,7 @@ class Plugin {
      * FlexForms related functions
      *
      *******************************/
+
     /**
      * Converts $this->cObj->data['pi_flexform'] from XML string to flexForm array.
      *
@@ -139,7 +153,8 @@ class Plugin {
                         $c++;
                     }
                 }
-            } else {
+            }
+            else {
                 $tempArr = $tempArr[$v];
             }
         }

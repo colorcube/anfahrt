@@ -1,21 +1,9 @@
 <?php
 namespace Colorcube\Anfahrt\ViewHelpers;
 
-/*                                                                        *
- * This script is backported from the TYPO3 Flow package "TYPO3.Fluid".   *
- *                                                                        *
- * It is free software; you can redistribute it and/or modify it under    *
- * the terms of the GNU Lesser General Public License, either version 3   *
- *  of the License, or (at your option) any later version.                *
- *                                                                        *
- * The TYPO3 project - inspiring people to share!                         *
- *                                                                        */
-
-use Colorcube\Anfahrt\Utility\ViewHelperUtility;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
-use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextInterface;
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
-use TYPO3\CMS\Fluid\Core\ViewHelper\Facets\CompilableInterface;
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithContentArgumentAndRenderStatic;
 
 /**
  * Outputs an argument/value without any escaping. Is normally used to output
@@ -37,8 +25,11 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\Facets\CompilableInterface;
  *
  * @author René Fritz <r.fritz@colorcube.de>
  */
-class JavaScriptViewHelper extends AbstractViewHelper implements CompilableInterface
+class JavaScriptViewHelper extends AbstractViewHelper
 {
+
+    use CompileWithContentArgumentAndRenderStatic;
+
     /**
      * Disable the escaping interceptor because otherwise the child nodes would be escaped before this view helper
      * can decode the text's entities.
@@ -48,18 +39,11 @@ class JavaScriptViewHelper extends AbstractViewHelper implements CompilableInter
     protected $escapingInterceptorEnabled = false;
 
     /**
-     * @param mixed $value The value to output
-     * @return string
+     * @return void
      */
-    public function render($value = null)
+    public function initializeArguments()
     {
-        return static::renderStatic(
-            [
-                'value' => $value
-            ],
-            $this->buildRenderChildrenClosure(),
-            $this->renderingContext
-        );
+        $this->registerArgument('value', 'mixed', 'Value to set');
     }
 
     /**
@@ -72,7 +56,7 @@ class JavaScriptViewHelper extends AbstractViewHelper implements CompilableInter
      */
     public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext)
     {
-        $variableProvider = ViewHelperUtility::getVariableProviderFromRenderingContext($renderingContext);
+        $variableProvider = $renderingContext->getVariableProvider();
         $allVariables = $variableProvider->getAll();
 
         $value = $arguments['value'];
@@ -82,7 +66,7 @@ class JavaScriptViewHelper extends AbstractViewHelper implements CompilableInter
             $content = $value;
         }
 
-        // this makes long keys first in list an first to be replaced in template
+        // this makes long keys first in list and first to be replaced in template
         $keys = array_map('strlen', array_keys($allVariables));
         array_multisort($keys, SORT_DESC, $allVariables);
 

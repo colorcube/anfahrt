@@ -35,7 +35,7 @@
                 <source>Address (for route planning)</source>
             </trans-unit>
             <trans-unit id="anfahrt.pi_flexform.geocode">
-                <source>Geocoding</source>
+                <source>Address for coordinate search (Geocoding)</source>
             </trans-unit>
             <trans-unit id="anfahrt.pi_flexform.latitude">
                 <source>Latitude</source>

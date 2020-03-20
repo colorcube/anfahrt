@@ -1,10 +1,9 @@
 <?php
 namespace Colorcube\Anfahrt\ViewHelpers;
 
-use Colorcube\Anfahrt\Utility\ViewHelperUtility;
-use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextInterface;
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
-use TYPO3\CMS\Fluid\Core\ViewHelper\Facets\CompilableInterface;
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithContentArgumentAndRenderStatic;
 
 /**
  * Outputs an argument/value
@@ -18,8 +17,11 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\Facets\CompilableInterface;
  *
  * @author René Fritz <r.fritz@colorcube.de>
  */
-class InlineJsonViewHelper extends AbstractViewHelper implements CompilableInterface
+class InlineJsonViewHelper extends AbstractViewHelper
 {
+
+    use CompileWithContentArgumentAndRenderStatic;
+
     /**
      * Disable the escaping interceptor because otherwise the child nodes would be escaped before this view helper
      * can decode the text's entities.
@@ -29,18 +31,11 @@ class InlineJsonViewHelper extends AbstractViewHelper implements CompilableInter
     protected $escapingInterceptorEnabled = false;
 
     /**
-     * @param mixed $value The value to output
-     * @return string
+     * @return void
      */
-    public function render($value = null)
+    public function initializeArguments()
     {
-        return static::renderStatic(
-            [
-                'value' => $value
-            ],
-            $this->buildRenderChildrenClosure(),
-            $this->renderingContext
-        );
+        $this->registerArgument('value', 'mixed', 'Value to set');
     }
 
     /**
@@ -53,7 +48,7 @@ class InlineJsonViewHelper extends AbstractViewHelper implements CompilableInter
      */
     public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext)
     {
-        $variableProvider = ViewHelperUtility::getVariableProviderFromRenderingContext($renderingContext);
+        $variableProvider = $renderingContext->getVariableProvider();
         $allVariables = $variableProvider->getAll();
 
         $value = $arguments['value'];

@@ -28,9 +28,9 @@ namespace Colorcube\Anfahrt\ViewHelpers\Page;
  ***************************************************************/
 
 /**
- * Class FooterDataViewHelper
+ * Class HeaderDataViewHelper
  */
-class FooterDataViewHelper extends AbstractPageRenderingViewHelper {
+class HeaderDataViewHelper extends AbstractPageRenderingViewHelper {
 
 	/**
 	 * Renders HeaderData
@@ -38,7 +38,7 @@ class FooterDataViewHelper extends AbstractPageRenderingViewHelper {
 	 * @return void
 	*/
 	public function render() {
-		$this->pageRenderer->addFooterData($this->renderChildren());
+		$this->pageRenderer->addHeaderData($this->renderChildren());
 	}
 
 }

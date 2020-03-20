@@ -1,5 +1,5 @@
 <html xmlns:f="http://xsd.helmut-hummel.de/ns/TYPO3/CMS/Fluid/ViewHelpers"
-      xmlns:cc="http://typo3.org/ns/Colorcube/Anfahrt/ViewHelpers" data-namespace-typo3-fluid="true">
+      xmlns:anfahrt="http://typo3.org/ns/Colorcube/Anfahrt/ViewHelpers" data-namespace-typo3-fluid="true">
 
 
 <div class="tx-anfahrt-pi1">
@@ -7,7 +7,7 @@
 </div>
 
 
-<cc:variable.set name="popupWindowJson"><cc:inlineJson>
+<anfahrt:variable.set name="popupWindowJson"><anfahrt:inlineJson>
         <f:format.html>{description}</f:format.html>
 
         <p>
@@ -17,16 +17,15 @@
                 <f:translate key="LLL:EXT:anfahrt/Resources/Private/Language/locallang.xlf:anfahrt.route_planner"/>
             </f:link.external>
         </p>
-    </cc:inlineJson>
-</cc:variable.set>
+    </anfahrt:inlineJson>
+</anfahrt:variable.set>
 
 
-<cc:variable.set name="addressJson"><cc:inlineJson>{address}</cc:inlineJson>
-</cc:variable.set>
+<anfahrt:variable.set name="addressJson"><anfahrt:inlineJson>{address}</anfahrt:inlineJson></anfahrt:variable.set>
 
 
-<cc:page.footerData>
-    <cc:javaScript>
+<anfahrt:page.footerData>
+    <anfahrt:javaScript>
         <script>
             if (typeof window.initialize_anfahrt_maps === 'undefined') {
                 var array_of_initialize_anfahrt_maps_functions = [];
@@ -66,7 +65,8 @@
 
             array_of_initialize_anfahrt_maps_functions.push(initialize_anfahrt_map$v_id);
         </script>
-    </cc:javaScript>
+    </anfahrt:javaScript>
 
-</cc:page.footerData>
+    <script src="https://maps.googleapis.com/maps/api/js?key={googleMapApiKey}&amp;callback=initialize_anfahrt_maps" async defer></script>
+</anfahrt:page.footerData>
 </html>

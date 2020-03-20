@@ -8,6 +8,14 @@ plugin.tx_anfahrt_pi1 {
         width = 100%
         height = 38rem
         zoom = 14
+
+        # mapProvider = google
+        mapProvider = leaflet
+        
+        googleApiKey = 
+
+        leafletTilesUrl = https://{s}.tile.openstreetmap.de/{z}/{x}/{y}.png
+        leafletAttribution = &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors
     }
 
 }

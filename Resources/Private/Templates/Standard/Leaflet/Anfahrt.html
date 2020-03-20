@@ -1,0 +1,54 @@
+<html xmlns:f="http://xsd.helmut-hummel.de/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:anfahrt="http://typo3.org/ns/Colorcube/Anfahrt/ViewHelpers" data-namespace-typo3-fluid="true">
+
+
+<div class="tx-anfahrt-pi1">
+    <div id="map-anfahrt{id}" style="height: {height}; width: {width}; margin: 1rem 0; padding: 0"></div>
+</div>
+
+
+<anfahrt:variable.set name="popupWindowJson"><anfahrt:inlineJson>
+        <f:format.html>{description}</f:format.html>
+
+        <p>
+            <f:link.external
+                    uri="https://www.google.com/maps/dir//{address -> f:format.urlencode()}/@{latitude},{longitude}"
+                    target="_blank">
+                <f:translate key="LLL:EXT:anfahrt/Resources/Private/Language/locallang.xlf:anfahrt.route_planner"/>
+            </f:link.external>
+        </p>
+    </anfahrt:inlineJson>
+</anfahrt:variable.set>
+
+
+<anfahrt:variable.set name="addressJson"><anfahrt:inlineJson>{address}</anfahrt:inlineJson></anfahrt:variable.set>
+
+
+<anfahrt:page.headerData>
+    <link rel="stylesheet" href="/typo3conf/ext/anfahrt/Resources/Public/Contrib/leaflet-core-1.7.0.css?1.7.0"/>
+</anfahrt:page.headerData>
+
+
+<anfahrt:page.footerData>
+    <script src="/typo3conf/ext/anfahrt/Resources/Public/JavaScript/leaflet-core-1.7.0.js?1.7.0"></script>
+
+    <anfahrt:javaScript>
+        <script>
+            function initialize_anfahrt_map$v_id() {
+                const position = L.latLng($v_latitude, $v_longitude);
+                const mymap = L.map('map-anfahrt$v_id').setView(position, $v_zoom);
+
+                L.tileLayer('$v_leafletTilesUrl', {
+                    attribution: '$v_leafletAttribution',
+                }).addTo(mymap);
+
+                L.marker(position).addTo(mymap)
+                    .bindPopup($v_popupWindowJson).openPopup();
+            }
+
+            initialize_anfahrt_map$v_id();
+        </script>
+    </anfahrt:javaScript>
+
+</anfahrt:page.footerData>
+</html>

@@ -78,7 +78,6 @@ class Plugin
 
             default:
                 return '<div>settings.mapProvider not configured in TypoScript setup of \'anfahrt\' extension!</div>';
-                break;
         }
 
         $view->assignMultiple($variables);

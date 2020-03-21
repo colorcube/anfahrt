@@ -1,6 +1,6 @@
 <?php
 
-$EM_CONF[$_EXTKEY] = [
+$EM_CONF['anfahrt'] = [
     'title' => 'Anfahrt: Simple map for one location',
     'description' => 'Simple map plugin with marker and popup window. Comfortable geo coding in backend. Uses Google Maps.',
     'category' => 'plugin',

@@ -4,7 +4,7 @@ defined('TYPO3_MODE') or die();
 $boot = function () {
 
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPItoST43(
-        'anfahrt', 'Classes/Controller/Plugin.php', '_pi1', 'list_type', 1);
+        'anfahrt', 'Classes/Controller/Plugin.php', '_pi1', 'list_type', true);
 
 
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(

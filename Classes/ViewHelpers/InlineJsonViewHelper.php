@@ -48,9 +48,6 @@ class InlineJsonViewHelper extends AbstractViewHelper
      */
     public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext)
     {
-        $variableProvider = $renderingContext->getVariableProvider();
-        $allVariables = $variableProvider->getAll();
-
         $value = $arguments['value'];
         if ($value === null) {
             $content = $renderChildrenClosure();

@@ -140,7 +140,7 @@ class Plugin
     public function pi_getFFvalueFromSheetArray($sheetArray, $fieldNameArr, $value)
     {
         $tempArr = $sheetArray;
-        foreach ($fieldNameArr as $k => $v) {
+        foreach ($fieldNameArr as $v) {
             if (MathUtility::canBeInterpretedAsInteger($v)) {
                 if (is_array($tempArr)) {
                     $c = 0;
